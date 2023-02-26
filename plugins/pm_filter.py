@@ -1013,7 +1013,7 @@ async def cb_handler(client: Client, query: CallbackQuery):
         await query.message.edit_text(
             text=script.HELP_STRINGS.format(query.from_user.mention, "@lnc3f3r"),
             parse_mode="html",
-            reply_markup=keyboard)
+            reply_markup=keyboard
 
         buttons = [
              [
