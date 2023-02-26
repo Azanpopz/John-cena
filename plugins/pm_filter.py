@@ -140,40 +140,41 @@ async def give_filter_edited(client, message):
         if re.search(pattern, name, flags=re.IGNORECASE):
             await check_manual_filter(client, group_id, keyword, message, 0)
             return
-              reply_text, btn, alert, fileid = await find_filter(group_id, keyword)
-             
-              if reply_text:
-                 reply_text = reply_text.replace("\\n", "\n").replace("\\t", "\t")
-             
-              if btn is not None:
-                  try:
-                      if fileid == "None":
-                          if btn == "[]":
-                              await message.reply_text(reply_text, disable_web_page_preview=True)
-                          else:
-                              button = eval(btn)
-                              await message.reply_text(
-                                  reply_text,
-                                  disable_web_page_preview=True,
-                                  reply_markup=InlineKeyboardMarkup(button)
-                              )
-                      elif btn == "[]":
-                          await message.reply_cached_media(
-                              fileid,
-                              caption=reply_text or ""
-                          )
-                      else:
-                          button = eval(btn)
-                          await message.reply_cached_media(
-                              fileid,
-                              caption=reply_text or "",
-                              reply_markup=InlineKeyboardMarkup(button)
-                          )
-                  except Exception as e:
-                      logger.exception(e)
-                  break
+            reply_text, btn, alert, fileid = await find_filter(group_id, keyword)
+            
+            if reply_text:
+                reply_text = reply_text.replace("\\n", "\n").replace("\\t", "\t")
+           
+            if btn is not None:
+                try:
+                    if fileid == "None":
+                        if btn == "[]":
+                            await message.reply_text(reply_text, disable_web_page_preview=True)
+                        else:
+                            button = eval(btn)
+                            await message.reply_text(
+                                reply_text,
+                                disable_web_page_preview=True,
+                                reply_markup=InlineKeyboardMarkup(button)
+                            )
+                    elif btn == "[]":
+                        await message.reply_cached_media(
+                            fileid,
+                            caption=reply_text or ""
+                        )
+                    else:
+                        button = eval(btn)
+                        await message.reply_cached_media(
+                            fileid,
+                            caption=reply_text or "",
+                            reply_markup=InlineKeyboardMarkup(button)
+                        )
+                except Exception as e:
+                    logger.exception(e)
+                break
     else:
         await auto_filter(client, message)
+
 
 
 @Client.on_callback_query(filters.regex(r"^select"))
