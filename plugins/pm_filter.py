@@ -420,7 +420,7 @@ async def next_page(bot, query):
             ]
             for file in files
         ]
-    else:           text=f"{file.file_name}", text=f"{get_size(file.file_size)}",
+    else:            # text=f"{file.file_name}", text=f"{get_size(file.file_size)}",
         btn = [
             [
                 InlineKeyboardButton(
