@@ -24,8 +24,8 @@ logger.setLevel(logging.INFO)
 BTN_URL_REGEX = re.compile(
     r"(\[([^\[]+?)\]\((buttonurl|buttonalert):(?:/{0,2})(.+?)(:same)?\))"
 )
-# BR_BTN_URL_REGEX = re.compile(
-#   r"(\[([^\[]+?)\]\((buttonurl):(?:/{0,2})(.+?)(:same)?\))")
+BR_BTN_URL_REGEX = re.compile(
+  r"(\[([^\[]+?)\]\((buttonurl):(?:/{0,2})(.+?)(:same)?\))")
 
 imdb = IMDb()
 
