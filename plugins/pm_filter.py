@@ -1029,11 +1029,11 @@ async def cb_handler(client: Client, query: CallbackQuery):
                  InlineKeyboardButton('🔮 Status', callback_data='stats')
              ]
          ]
-        # reply_markup = InlineKeyboardMarkup(buttons)
-        # await query.message.edit_text(
-        #     text=script.HELP_TXT.format(query.from_user.mention),
-        #     reply_markup=reply_markup
-        # )
+         reply_markup = InlineKeyboardMarkup(buttons)
+         await query.message.edit_text(
+             text=script.HELP_TXT.format(query.from_user.mention),
+             reply_markup=reply_markup
+         )
     elif query.data == "about":
         buttons = [
             [
