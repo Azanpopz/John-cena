@@ -1007,14 +1007,8 @@ async def cb_handler(client: Client, query: CallbackQuery):
             text=script.START_TXT.format(query.from_user.mention, temp.U_NAME, temp.B_NAME),
             reply_markup=reply_markup
         )
+    
     elif query.data == "help":
-        # if not keyboard:
-        keyboard = InlineKeyboardMarkup(paginate_modules(0, HELPABLE, "help"))
-        await query.message.edit_text(
-            text=script.HELP_STRINGS.format(query.from_user.mention, "@lnc3f3r"),
-            parse_mode="html",
-            reply_markup=keyboard
-
         buttons = [
              [
                  InlineKeyboardButton('Manual Filter', callback_data='manuelfilter'),
@@ -1029,25 +1023,9 @@ async def cb_handler(client: Client, query: CallbackQuery):
                  InlineKeyboardButton('🔮 Status', callback_data='stats')
              ]
          ]
-         reply_markup = InlineKeyboardMarkup(buttons)
-         await query.message.edit_text(
-             text=script.HELP_TXT.format(query.from_user.mention),
-             reply_markup=reply_markup
-         )
-    elif query.data == "about":
-        buttons = [
-            [
-                InlineKeyboardButton('🤖 Updates', url='https://t.me/TeamEvamaria'),
-                InlineKeyboardButton('♥️ Source', callback_data='source')
-            ],
-            [
-                InlineKeyboardButton('🏠 Home', callback_data='start'),
-                InlineKeyboardButton('🔐 Close', callback_data='close_data')
-            ]
-        ]
         reply_markup = InlineKeyboardMarkup(buttons)
         await query.message.edit_text(
-            text=script.ABOUT_TXT.format(temp.B_NAME),
+            text=script.HELP_TXT.format(query.from_user.mention),
             reply_markup=reply_markup
         )
     elif query.data == "source":
