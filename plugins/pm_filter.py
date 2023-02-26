@@ -410,7 +410,7 @@ async def next_page(bot, query):
         SPELL_CHECK_REPLY = settings["spell_check"]
         IMDB = settings["imdb"]
 
-    if SINGLE_BUTTON:       text=f"[{get_size(file.file_size)}] - 🎬 {file.file_name}",
+    if SINGLE_BUTTON:     # text=f"[{get_size(file.file_size)}] - 🎬 {file.file_name}",
         btn = [
             [
                 InlineKeyboardButton(
