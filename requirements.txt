@@ -16,3 +16,4 @@ gTTS
 aiohttp
 pyperclip
 python-decouple
+pyrogram>=2.0.30
