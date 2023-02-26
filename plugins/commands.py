@@ -297,8 +297,8 @@ async def start(client, message):
                         ),
                         InlineKeyboardButton(
                             '🎭 ᴍᴏᴠɪᴇs', url="https://t.me/UniversalFilmStudio"
-                        )
-                    ],
+                        ),
+                    ]
                     [
                         InlineKeyboardButton(
                             '⭕️ ᴘᴍ ᴍᴇ ⭕️', url="https://t.me/UFSChatBot"
