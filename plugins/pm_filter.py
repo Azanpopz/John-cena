@@ -410,7 +410,7 @@ async def next_page(bot, query):
         SPELL_CHECK_REPLY = settings["spell_check"]
         IMDB = settings["imdb"]
 
-    if SINGLE_BUTTON:       # text=f"[{get_size(file.file_size)}] - 🎬 {file.file_name}",
+    if SINGLE_BUTTON:       text=f"[{get_size(file.file_size)}] - 🎬 {file.file_name}",
         btn = [
             [
                 InlineKeyboardButton(
@@ -420,7 +420,7 @@ async def next_page(bot, query):
             ]
             for file in files
         ]
-    else:           # text=f"{file.file_name}", text=f"{get_size(file.file_size)}",
+    else:           text=f"{file.file_name}", text=f"{get_size(file.file_size)}",
         btn = [
             [
                 InlineKeyboardButton(
@@ -1311,8 +1311,8 @@ async def cb_handler(client: Client, query: CallbackQuery):
 
         # ensure no spinny white circle
         await client.answer_callback_query(query.id)
-        # await query.message.delete()
-        # bot.delete_message(update.effective_chat.id, update.effective_message.id - 1)
+        await query.message.delete()
+        bot.delete_message(update.effective_chat.id, update.effective_message.id - 1)
     except BadRequest as excp:
         if excp.message == "Message Is Not Modified":
             pass
@@ -1328,10 +1328,10 @@ async def cb_handler(client: Client, query: CallbackQuery):
 
 async def check_manual_filter(client, group_id, keyword, message, msg):
     reply_text, btn, alert, fileid = await find_filter(group_id, keyword)
-    # if bool(msg.message.reply_to_message):
-    #     message = msg.message.reply_to_message
-    # else:
-    #     message = msg
+    if bool(msg.message.reply_to_message):
+        message = msg.message.reply_to_message
+    else:
+        message = msg
 
     if reply_text:
         reply_text = reply_text.replace("\\n", "\n").replace("\\t", "\t")
@@ -1362,10 +1362,10 @@ async def check_manual_filter(client, group_id, keyword, message, msg):
                 if btn == "[]":
                     d_msg = await message.reply_text(reply_text, disable_web_page_preview=True)
 
-                # if AUTO_DELETE:
-                #     await asyncio.sleep(int(DELETE_TIME))
-                #     await message.delete()
-                #     await d_msg.delete()
+                if AUTO_DELETE:
+                    await asyncio.sleep(int(DELETE_TIME))
+                    await message.delete()
+                    await d_msg.delete()
                 else:
                     button = eval(btn)
                     d_msg = await message.reply_text(
@@ -1390,7 +1390,7 @@ async def check_manual_filter(client, group_id, keyword, message, msg):
 
                 if int(msg) > 0:
                     await client.delete_messages(chat_id=group_id, message_ids=int(msg))
-                    # await msg.message.delete()
+                    await msg.message.delete()
 
                 if AUTO_DELETE:
                     await asyncio.sleep(int(DELETE_TIME))
@@ -1406,7 +1406,7 @@ async def check_manual_filter(client, group_id, keyword, message, msg):
 
                 if int(msg) > 0:
                     await client.delete_messages(chat_id=group_id, message_ids=int(msg))
-                    # await msg.message.delete()
+                    await msg.message.delete()
 
                 if AUTO_DELETE:
                     await asyncio.sleep(int(DELETE_TIME))
@@ -1594,22 +1594,22 @@ async def auto_filter(client, msg, spoll=False, cb=None):
                 d_msg = await message.reply_photo(photo=imdb.get('poster'), caption=cap,
                                                   reply_markup=InlineKeyboardMarkup(btn))
 
-                # if AUTO_DELETE:
-                #     await asyncio.sleep(int(DELETE_TIME))
-                #     await message.delete()
-                #     await d_msg.delete()
+                if AUTO_DELETE:
+                    await asyncio.sleep(int(DELETE_TIME))
+                    await message.delete()
+                    await d_msg.delete()
             except (MediaEmpty, PhotoInvalidDimensions, WebpageMediaEmpty):
                 pic = imdb.get('poster')
                 poster = pic.replace('.jpg', "._V1_UX360.jpg")
                 d_msg = await message.reply_photo(photo=poster, caption=cap, reply_markup=InlineKeyboardMarkup(btn))
 
-                # if AUTO_DELETE:
-                #     await asyncio.sleep(int(DELETE_TIME))
-                #     await message.delete()
-                #     await d_msg.delete()
+                if AUTO_DELETE:
+                    await asyncio.sleep(int(DELETE_TIME))
+                    await message.delete()
+                    await d_msg.delete()
             except Exception as e:
                 logger.exception(e)
-                # await message.reply_text(cap, reply_markup=InlineKeyboardMarkup(btn))
+                await message.reply_text(cap, reply_markup=InlineKeyboardMarkup(btn))
                 d_msg = await client.send_photo(
                     chat_id=msg.chat.id,
                     photo=random.choice(PICS),
@@ -1618,10 +1618,10 @@ async def auto_filter(client, msg, spoll=False, cb=None):
                     parse_mode="html",
                     reply_to_message_id=msg.id)
 
-                # if AUTO_DELETE:
-                #     await asyncio.sleep(int(DELETE_TIME))
-                #     await message.delete()
-                #     await d_msg.delete()
+                if AUTO_DELETE:
+                    await asyncio.sleep(int(DELETE_TIME))
+                    await message.delete()
+                    await d_msg.delete()
         else:
             # await message.reply_text(cap, reply_markup=InlineKeyboardMarkup(btn))
             d_msg = await client.send_photo(
