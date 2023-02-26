@@ -1015,20 +1015,20 @@ async def cb_handler(client: Client, query: CallbackQuery):
             parse_mode="html",
             reply_markup=keyboard)
 
-        # buttons = [
-        #     [
-        #         InlineKeyboardButton('Manual Filter', callback_data='manuelfilter'),
-        #         InlineKeyboardButton('Auto Filter', callback_data='autofilter')
-        #     ],
-        #     [
-        #         InlineKeyboardButton('Connection', callback_data='coct'),
-        #         InlineKeyboardButton('Extra Mods', callback_data='extra')
-        #     ],
-        #     [
-        #         InlineKeyboardButton('🏠 Home', callback_data='start'),
-        #         InlineKeyboardButton('🔮 Status', callback_data='stats')
-        #     ]
-        # ]
+         buttons = [
+              [
+                 InlineKeyboardButton('Manual Filter', callback_data='manuelfilter'),
+                 InlineKeyboardButton('Auto Filter', callback_data='autofilter')
+             ],
+             [
+                 InlineKeyboardButton('Connection', callback_data='coct'),
+                 InlineKeyboardButton('Extra Mods', callback_data='extra')
+             ],
+             [
+                 InlineKeyboardButton('🏠 Home', callback_data='start'),
+                 InlineKeyboardButton('🔮 Status', callback_data='stats')
+             ]
+         ]
         # reply_markup = InlineKeyboardMarkup(buttons)
         # await query.message.edit_text(
         #     text=script.HELP_TXT.format(query.from_user.mention),
@@ -1682,9 +1682,9 @@ async def advantage_spell_chok(client, msg):
         await asyncio.sleep(15)  # in seconds
         await Send_message.delete()
         await msg.delete()
-        # k = await msg.reply("I couldn't find any movie in that name.")
-        # await asyncio.sleep(8)
-        # await k.delete()
+        k = await msg.reply("I couldn't find any movie in that name.")
+        await asyncio.sleep(8)
+        await k.delete()
         return
     regex = re.compile(r".*(imdb|wikipedia).*", re.IGNORECASE)  # look for imdb / wiki results
     gs = list(filter(regex.match, g_s))
@@ -1722,9 +1722,9 @@ async def advantage_spell_chok(client, msg):
         await asyncio.sleep(15)  # in seconds
         await Send_message.delete()
         await msg.delete()
-        # k = await msg.reply("I Couldn't Find Anything Related To That. Check Your Spelling")
-        # await asyncio.sleep(8)
-        # await k.delete()
+        k = await msg.reply("I Couldn't Find Anything Related To That. Check Your Spelling")
+        await asyncio.sleep(8)
+        await k.delete()
         return
     SPELL_CHECK[msg.id] = movielist
     i = 1
@@ -1758,11 +1758,11 @@ async def advantage_spell_chok(client, msg):
     btn.insert(0, [
         InlineKeyboardButton("⚜ Nᴇᴡ Oᴛᴛ Mᴏᴠɪᴇs ⚜", url="https://t.me/+uuLR9YwyRjg0ODQ0")
     ])
-    #
-    # btn.insert(0, [
-    #     InlineKeyboardButton("⭕️ ᴘᴍ ᴍᴇ ⭕️", url="https://t.me/UFSChatBot"),
-    #     InlineKeyboardButton("⚜ ɴᴇᴡ ᴍᴏᴠɪᴇs ⚜", url="https://t.me/UFSNewRelease")
-    # ])
+    
+     btn.insert(0, [
+         InlineKeyboardButton("⭕️ ᴘᴍ ᴍᴇ ⭕️", url="https://t.me/UFSChatBot"),
+         InlineKeyboardButton("⚜ ɴᴇᴡ ᴍᴏᴠɪᴇs ⚜", url="https://t.me/UFSNewRelease")
+     ])
 
     d_msg = await msg.reply(f"I Couldn't Find Anything Related To That\n\n"
                             f"**എന്താണ്‌ മാഷേ, അയക്കും മുമ്പ്‌ കറക്റ്റ്‌ ആണോ ന്ന് ഒന്ന് ചെക്ക്‌ ചെയ്യ്‌.**\n\n"
