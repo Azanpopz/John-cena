@@ -490,18 +490,19 @@ async def update_restart(bot, message):
 
 # Update
 
-# @Client.on_message(filters.command('update') & filters.user(ADMINS))
-# async def upstream_repo(bot, message):
-#     try:
-#         out = subprocess.check_output(["git", "pull"]).decode("UTF-8")
-#         if "Already up to date." in str(out):
-#             return await message.reply_text("Its already up-to date!")
-#         await message.reply_text(f"```{out}```")
-#     except Exception as e:
-#         return await message.reply_text(str(e))
-#     m = await message.reply_text(
-#         "**Updated with default branch, restarting now.**")
-#     os.execvp(sys.executable, [sys.executable, "main.py"])
+
+@Client.on_message(filters.command('update') & filters.user(ADMINS))
+async def upstream_repo(bot, message):
+    try:
+        out = subprocess.check_output(["git", "pull"]).decode("UTF-8")
+        if "Already up to date." in str(out):
+            return await message.reply_text("Its already up-to date!")
+        await message.reply_text(f"```{out}```")
+    except Exception as e:
+        return await message.reply_text(str(e))
+    m = await message.reply_text(
+        "**Updated with default branch, restarting now.**")
+    os.execvp(sys.executable, [sys.executable, "main.py"])
 
 
 @Bot.on_message(filters.command("bat"))
