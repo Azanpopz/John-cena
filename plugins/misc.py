@@ -163,68 +163,68 @@ async def imdb_search(client, message):
         await message.reply('Give me a movie / series Name')
 
 
-# @Client.on_callback_query(filters.regex('^imdb'))
-# async def imdb_callback(bot: Client, query: CallbackQuery):
-#     i, movie = query.data.split('#')
-#     imdb = await get_poster(query=movie, id=True)
-#     btn = [
-#         [
-#             InlineKeyboardButton(
-#                 text=f"{imdb.get('title')}",
-#                 url=imdb['url'],
-#             )
-#         ]
-#     ]
-#     if imdb:
-#         caption = IMDB_TEMPLATE.format(
-#             query=imdb['title'],
-#             title=imdb['title'],
-#             votes=imdb['votes'],
-#             aka=imdb["aka"],
-#             seasons=imdb["seasons"],
-#             box_office=imdb['box_office'],
-#             localized_title=imdb['localized_title'],
-#             kind=imdb['kind'],
-#             imdb_id=imdb["imdb_id"],
-#             cast=imdb["cast"],
-#             runtime=imdb["runtime"],
-#             countries=imdb["countries"],
-#             certificates=imdb["certificates"],
-#             languages=imdb["languages"],
-#             director=imdb["director"],
-#             writer=imdb["writer"],
-#             producer=imdb["producer"],
-#             composer=imdb["composer"],
-#             cinematographer=imdb["cinematographer"],
-#             music_team=imdb["music_team"],
-#             distributors=imdb["distributors"],
-#             release_date=imdb['release_date'],
-#             year=imdb['year'],
-#             genres=imdb['genres'],
-#             poster=imdb['poster'],
-#             plot=imdb['plot'],
-#             rating=imdb['rating'],
-#             url=imdb['url'],
-#             **locals()
-#         )
-#     else:
-#         caption = "No Results"
-#     if imdb.get('poster'):
-#         try:
-#             await query.message.reply_photo(photo=imdb['poster'], caption=caption,
-#                                             reply_markup=InlineKeyboardMarkup(btn))
-#         except (MediaEmpty, PhotoInvalidDimensions, WebpageMediaEmpty):
-#             pic = imdb.get('poster')
-#             poster = pic.replace('.jpg', "._V1_UX360.jpg")
-#             await query.message.reply_photo(photo=imdb['poster'], caption=caption,
-#                                             reply_markup=InlineKeyboardMarkup(btn))
-#         except Exception as e:
-#             logger.exception(e)
-#             await query.message.reply(caption, reply_markup=InlineKeyboardMarkup(btn), disable_web_page_preview=False)
-#         await query.message.delete()
-#     else:
-#         await query.message.edit(caption, reply_markup=InlineKeyboardMarkup(btn), disable_web_page_preview=False)
-#     await query.answer()
+@Client.on_callback_query(filters.regex('^imdb'))
+async def imdb_callback(bot: Client, query: CallbackQuery):
+    i, movie = query.data.split('#')
+    imdb = await get_poster(query=movie, id=True)
+    btn = [
+        [
+            InlineKeyboardButton(
+                text=f"{imdb.get('title')}",
+                url=imdb['url'],
+            )
+        ]
+    ]
+    if imdb:
+        caption = IMDB_TEMPLATE.format(
+            query=imdb['title'],
+            title=imdb['title'],
+            votes=imdb['votes'],
+            aka=imdb["aka"],
+            seasons=imdb["seasons"],
+            box_office=imdb['box_office'],
+            localized_title=imdb['localized_title'],
+            kind=imdb['kind'],
+            imdb_id=imdb["imdb_id"],
+            cast=imdb["cast"],
+            runtime=imdb["runtime"],
+            countries=imdb["countries"],
+            certificates=imdb["certificates"],
+            languages=imdb["languages"],
+            director=imdb["director"],
+            writer=imdb["writer"],
+            producer=imdb["producer"],
+            composer=imdb["composer"],
+            cinematographer=imdb["cinematographer"],
+            music_team=imdb["music_team"],
+            distributors=imdb["distributors"],
+            release_date=imdb['release_date'],
+            year=imdb['year'],
+            genres=imdb['genres'],
+            poster=imdb['poster'],
+            plot=imdb['plot'],
+            rating=imdb['rating'],
+            url=imdb['url'],
+            **locals()
+        )
+    else:
+        caption = "No Results"
+    if imdb.get('poster'):
+        try:
+            await query.message.reply_photo(photo=imdb['poster'], caption=caption,
+                                            reply_markup=InlineKeyboardMarkup(btn))
+        except (MediaEmpty, PhotoInvalidDimensions, WebpageMediaEmpty):
+            pic = imdb.get('poster')
+            poster = pic.replace('.jpg', "._V1_UX360.jpg")
+            await query.message.reply_photo(photo=imdb['poster'], caption=caption,
+                                            reply_markup=InlineKeyboardMarkup(btn))
+        except Exception as e:
+            logger.exception(e)
+            await query.message.reply(caption, reply_markup=InlineKeyboardMarkup(btn), disable_web_page_preview=False)
+        await query.message.delete()
+    else:
+        await query.message.edit(caption, reply_markup=InlineKeyboardMarkup(btn), disable_web_page_preview=False)
+    await query.answer()
 
 
 @Client.on_message(filters.command(["speech"]))
@@ -306,26 +306,26 @@ async def paste_func(_, message):
     m = await message.reply("Pasting...")
     await asyncio.sleep(1)
 
-    # if r.text:
-    #     content = r.text
-    # elif r.document:
-    #     p_file = await r.download()
-    #     content = open(p_file, "r").read()
-    #     os.remove(p_file)
+    if r.text:
+        content = r.text
+    elif r.document:
+        p_file = await r.download()
+        content = open(p_file, "r").read()
+        os.remove(p_file)
 
-    # link, rawlink = await paste(content)
-    # s_link, s_rawlink = await spaste(content)
-    # kb = InlineKeyboardMarkup(
-    #     [[InlineKeyboardButton("PasteBin", url=link), InlineKeyboardButton("SpaceBin", url=s_link)]])
-    # await message.reply_text(
-    #     f"**Pasted!**\nPasteBin: [Here]({rawlink})\nSpaceBin: [Here]({s_rawlink})",
-    #     quote=True,
-    #     reply_markup=kb,
-    # )
-    # await message.reply_text(
-    #     f"**Pasted!**\n{pyperclip.paste()}",
-    #     quote=True,
-    # )
+    link, rawlink = await paste(content)
+    s_link, s_rawlink = await spaste(content)
+    kb = InlineKeyboardMarkup(
+        [[InlineKeyboardButton("PasteBin", url=link), InlineKeyboardButton("SpaceBin", url=s_link)]])
+    await message.reply_text(
+        f"**Pasted!**\nPasteBin: [Here]({rawlink})\nSpaceBin: [Here]({s_rawlink})",
+        quote=True,
+        reply_markup=kb,
+    )
+    await message.reply_text(
+        f"**Pasted!**\n{pyperclip.paste()}",
+        quote=True,
+    )
     logging.info(pyperclip.paste())
     await message.reply_text(
         f"{pyperclip.paste()}"
