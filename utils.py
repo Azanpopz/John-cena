@@ -116,7 +116,7 @@ async def get_poster(query, bulk=False, id=False, file=None):
             return movieid
         movieid = movieid[0].movieID
     else:
-        # movieid = int(query)
+        movieid = int(query)
         movieid = query
     movie = imdb.get_movie(movieid)
     if movie.get("original air date"):
@@ -307,9 +307,9 @@ def markdown_parser(txt: str, entities: Dict[MessageEntity, str] = None, offset:
 
     prev = 0
     res = ""
-    # Loop over all message entities, and:
-    # reinsert code
-    # escape free-standing urls
+    Loop over all message entities, and:
+    reinsert code
+    escape free-standing urls
     for ent, ent_text in entities.items():
         if ent.offset < -offset:
             continue
