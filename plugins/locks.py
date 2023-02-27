@@ -323,7 +323,7 @@ async def build_lock_message(chat_id):
     return res
 
 
-@Client.on_message(filters.command("locks") & filters.private & ~filters.edited
+@Client.on_message(filters.command("locks") & filters.private)    # & ~filters.edited
 async def list_locks(client, message):
     userid = message.from_user.id if message.from_user else None
     if not userid:
